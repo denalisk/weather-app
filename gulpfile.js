@@ -49,7 +49,7 @@ gulp.task('concatInterface', function() {
 });
 
 gulp.task("minifyScrpts", ["jsBrowserify"], function(){
-  return gulp.src("./build/js/app/js")
+  return gulp.src("./build/js/app.js")
   .pipe(uglify())
   .pipe(gulp.dest("./build/js"));
 });
