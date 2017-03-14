@@ -9,13 +9,25 @@ function Weather(city){
   // this.cloudiness;
 }
 
+Weather.pastSearches = [];
+
+Weather.prototype.addSearch = function(newSearch) {
+  Weather.pastSearches.push(newSearch);
+};
+
+Weather.prototype.getSearches = function(divFunction) {
+  for(var index = 0; (index < Weather.pastSearches.length && index < 5); index++) {
+    divFunction(Weather.pastSearches[index]);
+    console.log("looping");
+  }
+};
+
 Weather.prototype.getWeather = function (displayFunction) {
   var current = this;
-  console.log('http://api.openweathermap.org/data/2.5/weather?q=' + current.city + '&appid=' + apiKey);
+  // console.log('http://api.openweathermap.org/data/2.5/weather?q=' + current.city + '&appid=' + apiKey);
   $.get('http://api.openweathermap.org/data/2.5/weather?q=' + current.city + '&appid=' + apiKey)
 
   .then(function(response) {
-    console.log(response);
     var temp = response.main.temp - 273;
     var windSpeed = response.wind.speed*2.23694;
     var weather = response.weather[0].description;
@@ -24,7 +36,7 @@ Weather.prototype.getWeather = function (displayFunction) {
     // $("#lat").val(response.coord.lat);
     // $("#long").val(response.coord.lon);
     displayFunction(current.city, weather, humidity, temp, windSpeed, cloudiness);
-    current.initMap(response.coord.lat, response.coord.lon)
+    current.initMap(response.coord.lat, response.coord.lon);
   })
 
   .fail(function(error){
@@ -42,7 +54,7 @@ Weather.prototype.initMap = function(lat, long) {
     position: position,
     map: map
   });
-}
+};
 
 // Weather.prototype.returnWeather = function(displayFunction){
 //   var current = this;
