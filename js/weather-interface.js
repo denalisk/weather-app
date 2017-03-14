@@ -26,7 +26,6 @@ $(document).ready(function() {
     var city = $('#location').val();
     var currentWeatherObject = new Weather(city);
     currentWeatherObject.addSearch(city);
-    $('.showCity').text("The city you have chosen is " + city + ".");
     currentWeatherObject.getWeather(displayWeather);
     // initMap();
     // setInterval(function(){currentWeatherObject.getWeather(displayWeather);}, 100000);
@@ -36,7 +35,6 @@ $(document).ready(function() {
     $(".past-btn").off().click(function(){
       var city = $(this).val();
       var currentWeatherObject = new Weather(city);
-      $('.showCity').text("The city you have chosen is " + city + ".");
       currentWeatherObject.getWeather(displayWeather);
     });
 

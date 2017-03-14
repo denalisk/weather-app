@@ -16,8 +16,10 @@ Weather.prototype.addSearch = function(newSearch) {
 };
 
 Weather.prototype.getSearches = function(divFunction) {
+  var revArray = Weather.pastSearches;
+  revArray.reverse();
   for(var index = 0; (index < Weather.pastSearches.length && index < 5); index++) {
-    divFunction(Weather.pastSearches[index]);
+    divFunction(revArray[index]);
     console.log("looping");
   }
 };
