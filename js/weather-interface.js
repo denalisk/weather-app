@@ -14,9 +14,9 @@ $(document).ready(function() {
     var city = $('#location').val();
     var currentWeatherObject = new Weather(city);
     $('.showCity').text("The city you have chosen is " + city + ".");
-    // currentWeatherObject.getWeather(displayWeather);
-    // // currentWeatherObject.returnWeather(displayWeather);
-    setInterval(currentWeatherObject.updateWeather(displayWeather), 10000);
+    currentWeatherObject.getWeather(displayWeather);
+
+    setInterval(function(){currentWeatherObject.getWeather(displayWeather)}, 10000);
   });
 
 });

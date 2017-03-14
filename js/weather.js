@@ -1,29 +1,27 @@
 var apiKey = require('./../.env').apiKey;
 
 function Weather(city){
-  var currentWeather = this;
   this.city = city;
-  this.weather = "";
-  this.temp = "";
-  this.humidity = "";
-  this.windSpeed = "";
-  this.cloudiness = "";
+  this.weather;
+  this.temp;
+  this.humidity;
+  this.windSpeed;
+  this.cloudiness;
 }
 
 Weather.prototype.getWeather = function (displayFunction) {
-  $.get('http://api.openweathermap.org/data/2.5/weather?q=' + this.city + '&appid=' + apiKey)
+  var current = this;
+  $.get('http://api.openweathermap.org/data/2.5/weather?q=' + current.city + '&appid=' + apiKey)
 
   .then(function(response) {
     console.log(response);
-    currentWeather.temp = response.main.temp - 273;
-    currentWeather.windSpeed = response.wind.speed*2.23694;
-    currentWeather.weather = response.weather[0].description;
-    currentWeather.humidity = response.main.humidity;
-    currentWeather.cloudiness = response.clouds.all;
-    console.log(currentWeather);
+    var temp = response.main.temp - 273;
+    var windSpeed = response.wind.speed*2.23694;
+    var weather = response.weather[0].description;
+    var humidity = response.main.humidity;
+    var cloudiness = response.clouds.all;
+    displayFunction(current.city, weather, humidity, temp, windSpeed, cloudiness)
   })
-
-  .then(this.returnWeather(displayFunction))
 
   .fail(function(error){
     $('.showError').text(error.responseJSON.message);
@@ -31,15 +29,16 @@ Weather.prototype.getWeather = function (displayFunction) {
 };
 
 Weather.prototype.returnWeather = function(displayFunction){
-  console.log("diaplay");
-  displayFunction(this.city, this.weather, this.humidity, this.temp, this.windSpeed, this.cloudiness);
+  var current = this;
+  console.log("In returnWeather the object is ");
+  console.log(current);
+  displayFunction(current.city, current.weather, current.humidity, current.temp, current.windSpeed, current.cloudiness);
 };
 
 Weather.prototype.updateWeather = function(displayFunction) {
-  console.log("Tick");
-  this.getWeather(displayFunction);
-  // this.returnWeather(displayFunction);
-}
+  var current = this;
+  current.getWeather(displayFunction).then(current.returnWeather(displayFunction));
+};
 
 
 exports.weatherModule = Weather;
