@@ -9,17 +9,14 @@ function displayWeather(city, weatherDescription, humidityData, temperatureData,
 }
 
 $(document).ready(function() {
-  var currentWeatherObject = new Weather();
 
   $('#weatherLocation').click(function() {
     var city = $('#location').val();
+    var currentWeatherObject = new Weather(city);
     $('.showCity').text("The city you have chosen is " + city + ".");
-    currentWeatherObject.getWeather(city, displayWeather);
+    // currentWeatherObject.getWeather(displayWeather);
+    // // currentWeatherObject.returnWeather(displayWeather);
+    setInterval(currentWeatherObject.updateWeather(displayWeather), 10000);
   });
 
-  $("#currentTemperature").click(function() {
-    var city = $('#location').val();
-
-
-  })
 });
