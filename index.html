@@ -19,11 +19,20 @@
       <div class="">
         <h1>Get Weather Conditions From Anywhere!</h1>
         <label for="location">Location</label>
-        <input type="text" id="location">
-        <button class="btn-success" id="weatherLocation">Get Current Humidity!</button>
-        <span class="showWeather">
-
-        </span>
+        <input type="text" id="location" value="Seattle">
+        <button class="btn-success" id="weatherLocation">Get Current Weather!</button>
+        <span class="showCity"></span>
+        <div class="currentWeather">
+          <h3>Current Weather in <span class="showCity"></span></h3>
+          <ul>
+            <li>Currently: <span class="showDescription"></span></li>
+            <li>Humidity is <span class="showHumidity"></span></li>
+            <li>Temperature: <span class="showTemperature"></span>degrees C</li>
+            <li>Wind speed is <span class="showWind"></span> mph</li>
+            <li>Cloud cover is <span class="showCloudiness"></span>%</li>
+          </ul>
+          <div class="showError"></div>
+        </div>
       </div>
     </div>
   </body>
